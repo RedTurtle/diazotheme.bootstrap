@@ -174,8 +174,9 @@
     </replace>
     <replace css:theme-children="#personaltool-menu" 
         css:content-children="#portal-personaltools ul"/>
-    <replace css:theme-children="#personaltool-menuheader" 
+     <replace css:theme-children="#personaltool-menuheader" 
         css:content-children="#portal-personaltools .actionMenuHeader a"/>
+    <copy attributes="href" css:theme="#secondary-nav li a"  css:content='#portal-personaltools dt a'/>
     <replace css:theme-children="#secondary-nav" css:if-content="#anon-personalbar">
         <li><xsl:copy-of css:select="#personaltools-login"/></li>
     </replace>
