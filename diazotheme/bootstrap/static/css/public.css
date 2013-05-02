@@ -1431,6 +1431,7 @@ fieldset,
 #content .field input[type="text"][name$=".title"],
 #archetypes-fieldname-title input {
     font-family: "Helvetica Neue", Arial, FreeSans, sans-serif;
+    height: 125%;
     line-height: 125%;
     color: Black;
     letter-spacing: -0.05em;
