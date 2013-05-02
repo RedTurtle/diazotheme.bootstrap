@@ -17,7 +17,6 @@
         <replace theme="/html/body"
             content="/html/body"/>
     </rules>
-    <theme href="html5slides/template/index.html" css:if-content=".presentation"/>
     <rules css:if-content=".presentation">
          <replace css:theme-children="section">
             <xsl:for-each css:select=".slide">
