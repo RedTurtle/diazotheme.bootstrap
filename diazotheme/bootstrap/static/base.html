@@ -49,53 +49,55 @@
 
       <body>
 
-         <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-               <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse"
-                   data-target="#topnav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                </a>
-               <a class="brand" href="/dashboard"><img src="img/home.png"/></a>
+         <div class="container">
+             <div id="header">
+                <img id="logo" src="img/logo.png"/>
+             </div>
+         </div>
+         <div class="container navbar-container">
+            <div id="main-navbar" class="navbar">
+               <div class="navbar-inner">
+                   <a class="btn btn-navbar" data-toggle="collapse"
+                      data-target="#topnav-collapse">
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   </a>
+                  <a class="brand" href="/dashboard"><img src="img/home.png"/></a>
 
 
-               <div class="nav-collapse" id="topnav-collapse">
-                  <ul id="nav" class="nav">
-                     <li><a href="#about">About</a></li>
-                     <li class="dropdown" data-dropdown='dropdown'>
-                     <a href="#" class="dropdown-toggle">Services</a>
-                     <ul class="dropdown-menu">
-                        <li><a href="#item1">Plone Development</a></li>
+                  <div class="nav-collapse" id="topnav-collapse">
+                     <ul id="nav" class="nav">
+                        <li><a href="#about">About</a></li>
+                        <li class="dropdown" data-dropdown='dropdown'>
+                        <a href="#" class="dropdown-toggle">Services</a>
+                        <ul class="dropdown-menu">
+                           <li><a href="#item1">Plone Development</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="#contact">Contact</a></li>
                      </ul>
-                     </li>
-                     <li><a href="#contact">Contact</a></li>
-                  </ul>
-                  <ul id="secondary-nav" class="nav pull-right">
-                     <li class="dropdown" data-dropdown="dropdown">
-                     <a class="dropdown-toggle" href="#">
-                        <span id="personaltool-menuheader">User</span>
-                        <b class="caret"></b></a>
-                     <ul class="dropdown-menu" id="personaltool-menu">
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Logout</a></li>
+                     <ul id="secondary-nav" class="nav pull-right">
+                        <li class="dropdown" data-dropdown="dropdown">
+                        <a class="dropdown-toggle" href="#">
+                           <span id="personaltool-menuheader">User</span>
+                           <b class="caret"></b></a>
+                        <ul class="dropdown-menu" id="personaltool-menu">
+                           <li><a href="#">Dashboard</a></li>
+                           <li><a href="#">Logout</a></li>
+                        </ul>
+                        </li>
                      </ul>
-                     </li>
-                  </ul>
-                  <form id="topsearchbox" class="navbar-search pull-right">
-                     <input class="search-query" name="SearchableText" placeholder="Search"/>
-                  </form>
+                     <form id="topsearchbox" class="navbar-search pull-right">
+                        <input class="search-query" name="SearchableText" placeholder="Search"/>
+                     </form>
+                  </div>
                </div>
-               </div>
+
             </div>
-
          </div>
 
          <div id="container" class="container">
-            <div id="header">
-               <img id="logo" src="img/logo.png"/>
-            </div>
 
             <div id="main" role="main" class="icons-on">
                <div>
