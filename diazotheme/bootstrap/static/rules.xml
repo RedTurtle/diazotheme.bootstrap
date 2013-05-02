@@ -285,4 +285,11 @@
     <xi:include href="facetednavigation-rules.xml"/>
     <append css:theme="#site-scripts" css:content="#portal-footer-wrapper > div > script"/>
     </rules>
+
+    <!-- make sure all <label> have class="label" for bootstrap compatibility
+         and other tags like <div> and <input> do not use them
+    -->
+    <xsl:template match="input/@class[contains(., 'label')] | div/@class[contains(., 'label')]">
+        <xsl:attribute name="class"><xsl:value-of select="str:replace(., 'label', '')" /></xsl:attribute>
+    </xsl:template> 
 </rules>
