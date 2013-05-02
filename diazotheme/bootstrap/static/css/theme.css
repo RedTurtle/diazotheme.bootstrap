@@ -390,3 +390,13 @@ div.row {
     }
 }
 
+@media (min-width: 767px) {
+    .offset0{
+        position:absolute;
+    }
+}
+@media (max-width: 767px) {
+    #left-column-content .managePortletsLink{
+        display: none;
+    }
+}
