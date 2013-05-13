@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    >
+           <replace css:theme="#center-column">
+            <div id="center-column"><xsl:attribute name="class">
+                    <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-3:4") and contains(//*[@id="portal-column-content"]/@class,"position-0")'>
+                        twocolumns span9
+                    </xsl:if>
+                    <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-3:4") and contains(//*[@id="portal-column-content"]/@class,"position-1:4")'>
+                        twocolumns span9 offset3
+                    </xsl:if>
+                    <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-1:2")'>
+                        threecolumns span6 offset3
+                    </xsl:if>
+                    <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-full")'>
+                        nocolumns span12
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:if css:test=".AbovePortletManager3">
+                    <div id="portletAboveContent">
+                        <xsl:for-each css:select=".AbovePortletManager3 .portletWrapper">
+                            <xi:include href="portlet-rules.xml"/>
+                        </xsl:for-each>
+                    </div>
+                </xsl:if>
+                <div id="#viewlet-above-content">
+                    <xsl:for-each css:select="#viewlet-above-content > *">
+                        <xsl:if test="@id">
+                        <xsl:if test="@id!='portlets-above' and
+                                      @id!='portal-breadcrumbs'">
+                            <xsl:copy-of select="current()"/>
+                        </xsl:if>
+                        </xsl:if>
+                        <xsl:if test="not(@id)">
+                            <xsl:copy-of select="current()"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </div>
+                <article>
+                    <xsl:copy-of css:select="#kssPortalMessage"/>
+                    <xsl:copy-of css:select=".portalMessage"/>
+                    <div id="action-bar">
+                        <ul class="nav nav-tabs">
+                        <xsl:for-each css:select="#content-views > li">
+                            <xi:include href="navigation-rules.xml"/>
+                        </xsl:for-each>
+                        <xsl:for-each css:select="#contentActionMenus > li">
+                            <li class="dropdown pull-right" data-dropdown="dropdown">
+                                <a class="dropdown-toggle" href="#"><xsl:attribute name="href">
+                                        <xsl:value-of select="dl/dt/a/@href"/>
+                                    </xsl:attribute>
+                                    <xsl:copy-of select="dl/dt/a/span"/>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" style="min-width:150px;">
+                                    <xsl:for-each css:select=".actionMenuContent > ul > li">
+                                        <xsl:copy-of select="current()"/>
+                                    </xsl:for-each>
+                                </ul>
+                            </li>
+                        </xsl:for-each>
+                        </ul>
+                    </div>
+
+                    <xsl:apply-templates css:select="#content"/>
+                </article>
+                <div class="visualClear"/>
+                <div id="#viewlet-below-content">
+                    <xsl:for-each css:select="#viewlet-below-content > *">
+                        <xsl:if test="@id">
+                        <xsl:if test="@id!='portlets-below'">
+                            <xsl:copy-of select="current()"/>
+                        </xsl:if>
+                        </xsl:if>
+                        <xsl:if test="not(@id)">
+                            <xsl:copy-of select="current()"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </div>
+                <xsl:if css:test=".BelowPortletManager5">
+                    <div id="portletBelowContent">
+                        <xsl:for-each css:select=".BelowPortletManager5 .portletWrapper">
+                            <xi:include href="portlet-rules.xml"/>
+                        </xsl:for-each>
+                    </div>
+                </xsl:if>
+            </div>
+        </replace>
+</rules>
