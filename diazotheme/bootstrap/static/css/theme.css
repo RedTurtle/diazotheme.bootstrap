@@ -435,8 +435,15 @@ input, textarea, .uneditable-input {
     max-width: 95%;
 }
 
+.navbar .brand{
+    display: none;
+}
 @media (max-width: 980px) {
     #LSResult{
         display: none !important;
     }
+    .navbar .brand{
+        display: block;
+    }
 }
+
