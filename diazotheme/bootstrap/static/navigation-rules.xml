@@ -6,6 +6,10 @@
     xmlns:xi="http://www.w3.org/2001/XInclude"
     >
 
+    <!-- This iters the global nav menu list items.
+        For each item, it tests if it's an ul tag.
+        If it's not an ul it just copy it (an select the active entry).
+    -->
     <xsl:if test="not(ul)">
         <li><xsl:attribute name="class">
                 <xsl:if test="contains(@class,'selected')">
@@ -15,6 +19,7 @@
             <xsl:copy-of select="a[node()]"/>
         </li>
     </xsl:if>
+    <!-- If it's an ul, it turns it into a bootstrap dropdown. --> 
     <xsl:if test="ul">
         <li class="dropdown" data-dropdown="dropdown">
             <a class="dropdown-toggle" href="#"><xsl:copy-of select="a/node()"/>

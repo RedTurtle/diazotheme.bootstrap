@@ -407,3 +407,43 @@ div.row {
 input.searchPage[type="text"]{
   height: 200%;
 }
+
+#LSResult{
+    left: 7em;
+    top: 3.5em;
+    width:20em;}
+    #LSResult #livesearchLegend {
+        padding: 0em;
+        background-color: transparent;
+        font-size: 1em;
+        padding-left: 0em;
+        margin-bottom: 0em;
+        text-align: center;}
+        #LSResult .livesearchContainer{
+            border-width: 0px;}
+            #LSResult .livesearchContainer .LSTable{
+                margin-left: 0px;}
+    #LSResult .LSRow{
+        width: 90%;
+    }
+
+.portlet .field{
+    margin-left: 0em;
+}
+
+input, textarea, .uneditable-input {
+    max-width: 95%;
+}
+
+.navbar .brand{
+    display: none;
+}
+@media (max-width: 980px) {
+    #LSResult{
+        display: none !important;
+    }
+    .navbar .brand{
+        display: block;
+    }
+}
+
