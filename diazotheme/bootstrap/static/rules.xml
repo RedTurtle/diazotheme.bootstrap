@@ -293,4 +293,16 @@
     <xsl:template match="input/@class[contains(., 'label')] | div/@class[contains(., 'label')]">
         <xsl:attribute name="class"><xsl:value-of select="str:replace(., 'label', '')" /></xsl:attribute>
     </xsl:template> 
+
+    <xsl:template match="div/@class[contains(., 'formControls')]">
+        <xsl:attribute name="class"><xsl:value-of select="." /> form-actions</xsl:attribute>
+    </xsl:template> 
+
+    <xsl:template match="input/@class[contains(., 'standalone')] | input/@class[contains(., 'searchButton')] | input/@class[contains(., 'fileType')]">
+        <xsl:attribute name="class"><xsl:value-of select="." /> btn</xsl:attribute>
+    </xsl:template> 
+
+    <xsl:template match="input/@class[contains(., 'context')]">
+        <xsl:attribute name="class"><xsl:value-of select="." /> btn btn-primary</xsl:attribute>
+    </xsl:template> 
 </rules>
