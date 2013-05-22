@@ -82,6 +82,17 @@
 
         <!-- this copy the action of the search box --> 
         <copy css:theme="#topsearchbox" css:content="#portal-searchbox form" attributes="action"/>
+        <!--<append css:theme="#topsearchbox" css:content="#portal-searchbox #LSResult"/>-->
+        <!--<xsl:template match="div/@class[contains(., 'LSResult')]">
+            <xsl:attribute name="class"><xsl:value-of select="str:replace(., 'modal', '')" /></xsl:attribute>
+        </xsl:template> -->
+        <append css:theme="#topsearchbox">
+                <div id="LSResult" class="LSResult modal" style="display:none">
+                    <!--<<xsl:attribute name="class"><xsl:value-of select="str:concat(., 'modal', '')" /></xsl:attribute>-->
+                    <xsl:copy-of select="//*[@id='LSResult']/*" />
+                </div>
+        </append>
+
 
         <!-- this includes rules for the main content -->
         <xi:include href="main-content.xml"/>
