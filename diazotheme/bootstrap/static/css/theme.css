@@ -523,9 +523,11 @@ input.searchPage{
     margin-bottom: 0;
     background-color: #FFFFFF;}
     #content-views li a{
-        color: #666666;}
+        color: #0088CC;}
         #content-views li a:hover{
-            background-color: #DDDDDD;
+            background-color: transparent;
+            text-decoration: underline;
+            color: #005580;
         }
 
 #viewlet-below-content .row{
