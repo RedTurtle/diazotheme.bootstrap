@@ -124,17 +124,12 @@
             css:content-children="#portal-personaltools .actionMenuHeader a"/>
         <copy attributes="href" css:theme="#secondary-nav li a"  css:content='#portal-personaltools dt a'/>
         <replace css:theme-children="#secondary-nav" css:if-content="#anon-personalbar">
-            <li><xsl:copy-of css:select="#personaltools-login"/></li>
+            <li><xsl:copy-of css:select="#personaltools-login" /></li>
         </replace>
 
         <copy css:theme=".navbar-fixed-top .brand" css:content="#portal-logo" attributes="href"/>
-        <replace css:theme-children=".breadcrumb">
-            <xsl:for-each css:select="#portal-breadcrumbs > span">
-                <li>
-                    <xsl:copy-of select="node()"/>
-                </li>
-            </xsl:for-each>
-        </replace>
+
+        <xi:include href="breadcrumbs.xml"/>
 
         <append css:theme=".footer" css:content-children="#portal-footer"/>
         <append css:theme=".footer" css:content="#portal-colophon"/>
@@ -232,7 +227,7 @@
             <div style="display:hidden"></div>
         </replace>
 
-        <xi:include href="facetednavigation-rules.xml"/>
+        <xi:include href="addon-facetednavigation.xml"/>
         <append css:theme="#site-scripts" css:content="#portal-footer-wrapper > div > script"/>
     </rules>
 
@@ -249,9 +244,33 @@
 
     <xsl:template match="input/@class[contains(., 'standalone')] | input/@class[contains(., 'searchButton')] | input/@class[contains(., 'fileType')]">
         <xsl:attribute name="class"><xsl:value-of select="." /> btn</xsl:attribute>
-    </xsl:template> 
+    </xsl:template>
 
     <xsl:template match="input/@class[contains(., 'context')]">
         <xsl:attribute name="class"><xsl:value-of select="." /> btn btn-primary</xsl:attribute>
-    </xsl:template> 
+    </xsl:template>
+
+    <xsl:template match="span/@class[contains(., 'subMenuTitle')]">
+        <xsl:attribute name="class"><xsl:value-of select="." /> label</xsl:attribute>
+    </xsl:template>
+
+    <!-- This replaces the input type with the html5's new type..it automatically falls back if not supported so it won't hurts-->
+    <xsl:template match="input/@id[contains(., 'contactEmail')]">
+        <xsl:attribute name="type">email</xsl:attribute>
+    </xsl:template>
+    <xsl:template match="input/@id[contains(., 'eventUrl')]">
+        <xsl:attribute name="type">url</xsl:attribute>
+    </xsl:template>
+    <xsl:template match="input/@id[contains(., 'contactPhone')]">
+        <xsl:attribute name="type">tel</xsl:attribute>
+    </xsl:template>
+    <xsl:template match="input/@name[contains(., 'remoteUrl')]">
+        <xsl:attribute name="type">url</xsl:attribute>
+    </xsl:template>
+
+    <!--
+    <xsl:template match="//*[@id='personaltools-login']">
+        <xsl:attribute name="class"><xsl:value-of select="." /> link-overlay</xsl:attribute>
+    </xsl:template>
+    <merge attributes="class" css:theme='*[@id="personaltools-login"]'></merge>-->
 </rules>

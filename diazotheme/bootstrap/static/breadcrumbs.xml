@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    >
+
+  <before css:theme=".breadcrumb" css:content="#breadcrumbs-you-are-here" />
+
+  <replace css:theme-children=".breadcrumb">
+    <xsl:for-each css:select="#portal-breadcrumbs > span:not(#breadcrumbs-you-are-here) > *">
+      <li>
+          <xsl:choose>
+            <xsl:when css:test=".breadcrumbSeparator">
+              <span class="divider">/</span>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:apply-templates css:select="a, span"/>
+            </xsl:otherwise>
+          </xsl:choose>
+      </li>
+    </xsl:for-each>
+  </replace>
+
+
+<!--
+
+This code was shamelessly copied http://www.thijs.biz/2011/11/05/diazo-html5/
+
+The above example basicly does this:
+
+xsl:if
+    This tests if the “breadcrumb-1″ id is available (when you have more than just home)
+append
+    Select the div with the breadcrumb id
+xsl:for-each
+    Loops through all the children of spans,  directly under portal-breadcrumbs, that do not have the “breadcrumbs-you-are-here” id.
+xsl:choose
+    For when you have multiple scenarios. In this case sort of if else, but you could have lots of different cases.
+xsl:when
+    First scenario, in this case selecting the breadcrumb separator and changing it.
+    span
+    Yes, you can add html structure like this.
+xsl:otherwise
+    If none of the above scenario’s match, then do this.
+xsl:apply-templates
+    Put the content you select into the theme side. In case of a for-each the selection is relative to the for each select.
+
+The xsl:apply-templates bit I used to do by useing xsl:copy-of, which put the content there, but takes it out of the xdv loop. The xsl:apply-templates way leaves it in.
+
+-->
+
+</rules>

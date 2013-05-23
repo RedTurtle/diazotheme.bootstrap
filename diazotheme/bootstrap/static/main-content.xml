@@ -27,7 +27,7 @@
                         </xsl:for-each>
                     </div>
                 </xsl:if>
-                <div id="#viewlet-above-content">
+                <div id="viewlet-above-content">
                     <xsl:for-each css:select="#viewlet-above-content > *">
                         <xsl:if test="@id">
                         <xsl:if test="@id!='portlets-above' and
@@ -44,6 +44,7 @@
                     <xsl:copy-of css:select="#kssPortalMessage"/>
                     <xsl:copy-of css:select=".portalMessage"/>
                     <div id="action-bar">
+                        <xsl:copy-of css:select="#content-views"/>
                         <ul class="nav nav-tabs">
                         <xsl:for-each css:select="#content-views > li">
                             <xi:include href="navigation-rules.xml"/>
@@ -69,7 +70,7 @@
                     <xsl:apply-templates css:select="#content"/>
                 </article>
                 <div class="visualClear"/>
-                <div id="#viewlet-below-content">
+                <div id="viewlet-below-content">
                     <xsl:for-each css:select="#viewlet-below-content > *">
                         <xsl:if test="@id">
                         <xsl:if test="@id!='portlets-below'">
