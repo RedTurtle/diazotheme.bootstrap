@@ -56,7 +56,8 @@
 
         <!-- let's import all css, js and metas-->
         <after css:theme="meta[http-equiv='X-UA-Compatible']" 
-            content="/html/head/link | /html/head/style | /html/head/script | /html/head/meta" />
+            content="/html/head/link | /html/head/style | /html/head/meta" />
+        <append css:theme="#site-scripts" content="/html/head/script" />
 
         <!-- these 2 rules are for contentwellportlet compatibility...I guess -->
         <append css:theme="#header">
@@ -128,7 +129,6 @@
                   </xsl:for-each>
               </div>
               <article>
-                  <xsl:copy-of css:select="#kssPortalMessage"/>
                   <xsl:copy-of css:select=".portalMessage"/>
                   <div id="action-bar">
                       <ul class="nav nav-tabs">
@@ -166,13 +166,6 @@
                       </xsl:if>
                   </xsl:for-each>
               </div>
-              <xsl:if css:test=".BelowPortletManager5">
-                  <div id="portletBelowContent">
-                      <xsl:for-each css:select=".BelowPortletManager5 .portletWrapper">
-                          <xi:include href="portlet-rules.xml"/>
-                      </xsl:for-each>
-                  </div>
-              </xsl:if>
           </div>
         </replace>
 
@@ -213,8 +206,10 @@
 
         <xi:include href="breadcrumbs.xml"/>
 
-        <append css:theme=".footer" css:content-children="#portal-footer"/>
+        <append css:theme=".footer" css:content-children="#portal-footer-wrapper"/>
+<!--        
         <append css:theme=".footer" css:content="#portal-colophon"/>
+-->
         <append css:theme=".footer" css:content="div#visual-portal-wrapper > div.row > script"/>
 
         <append css:theme="#left-column-content"
@@ -242,29 +237,67 @@
             </div>
         </replace>
 
-        <replace css:theme-children="#portletBelowContentA">
+        <replace css:theme-children="#portletBelowContentA" css:if-content=".BelowPortletManager1 .portletWrapper">
             <xsl:for-each css:select=".BelowPortletManager1 .portletWrapper">
                 <xi:include href="portlet-rules.xml"/>
             </xsl:for-each>
             <div style="display:hidden"></div>
         </replace>
-        <replace css:theme-children="#portletBelowContentB">
+        <drop css:theme="#portletBelowContentA" css:if-not-content=".BelowPortletManager1 .portletWrapper" />
+
+        <replace css:theme-children="#portletBelowContentB" css:if-content=".BelowPortletManager2 .portletWrapper">
             <xsl:for-each css:select=".BelowPortletManager2 .portletWrapper">
                 <xi:include href="portlet-rules.xml"/>
             </xsl:for-each>
             <div style="display:hidden"></div>
         </replace>
-        <replace css:theme-children="#portletBelowContentC">
+        <drop css:theme="#portletBelowContentB" css:if-not-content=".BelowPortletManager2 .portletWrapper" />
+
+        <replace css:theme-children="#portletBelowContentC" css:if-content=".BelowPortletManager3 .portletWrapper">
             <xsl:for-each css:select=".BelowPortletManager3 .portletWrapper">
                 <xi:include href="portlet-rules.xml"/>
             </xsl:for-each>
             <div style="display:hidden"></div>
         </replace>
-        <replace css:theme-children="#portletBelowContentD">
+        <drop css:theme="#portletBelowContentC" css:if-not-content=".BelowPortletManager3 .portletWrapper" />
+
+        <replace css:theme-children="#portletBelowContentD" css:if-content=".BelowPortletManager4 .portletWrapper">
             <xsl:for-each css:select=".BelowPortletManager4 .portletWrapper">
                 <xi:include href="portlet-rules.xml"/>
             </xsl:for-each>
         </replace>
+        <drop css:theme="#portletBelowContentD" css:if-not-content=".BelowPortletManager4 .portletWrapper" />
+
+        <replace css:theme-children="#portletBelowContentE" css:if-content=".BelowPortletManager5 .portletWrapper">
+            <xsl:for-each css:select=".BelowPortletManager5 .portletWrapper">
+                <xi:include href="portlet-rules.xml"/>
+            </xsl:for-each>
+        </replace>
+        <drop css:theme="#portletBelowContentE" css:if-not-content=".BelowPortletManager5 .portletWrapper" />
+
+        <replace css:theme-children="#portletBelowContentF" css:if-content=".BelowPortletManager6 .portletWrapper">
+            <xsl:for-each css:select=".BelowPortletManager6 .portletWrapper">
+                <xi:include href="portlet-rules.xml"/>
+            </xsl:for-each>
+        </replace>
+        <drop css:theme="#portletBelowContentF" css:if-not-content=".BelowPortletManager6 .portletWrapper" />
+
+        <drop css:theme="#portletBelowContentRow1"
+          if-not-content="//*[@id='portlets-below']/div[contains(@class, 'BelowPortletManager1')] or 
+                          //*[@id='portlets-below']/div[contains(@class, 'BelowPortletManager2')] or
+                          //*[@id='portlets-below']/div[contains(@class, 'BelowPortletManager3')]" />
+        <drop css:theme="#portletBelowContentRow2"
+          if-not-content="//*[@id='portlets-below']/div[contains(@class, 'BelowPortletManager4')] or 
+                          //*[@id='portlets-below']/div[contains(@class, 'BelowPortletManager5')] or
+                          //*[@id='portlets-below']/div[contains(@class, 'BelowPortletManager6')]" />
+
+<!--
+        <replace css:theme-children="#portletBelowContentManager">
+          <xsl:for-each css:select="#viewlet-below-content #portlets-below dl.portlet">
+            <xi:include href="portlet-rules.xml"/>
+          </xsl:for-each>
+        </replace>
+-->
         <replace css:theme-children="#portletFooterA">
             <xsl:for-each css:select=".FooterPortletManager1 .portletWrapper">
                 <xi:include href="portlet-rules.xml"/>

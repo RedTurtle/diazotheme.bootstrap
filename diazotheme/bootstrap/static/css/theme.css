@@ -33,9 +33,9 @@ label .required {
 }
 
 .footer {
-    background-color: #EEEEEE;
+    /*background-color: #EEEEEE;*/
     border-top: 1px solid #E5E5E5;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.024) inset;
+    /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.024) inset;*/
     padding: 30px 0;
     text-shadow: 0 1px 0 #FFFFFF;
 }
@@ -48,10 +48,11 @@ label .required {
     text-align:right;
 }
 
-
+/*
 #portletBelowContentManager {
     margin-top:20px;
 }
+*/
 
 #content-columns {
     /*display:table;*/
