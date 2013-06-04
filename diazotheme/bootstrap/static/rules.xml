@@ -85,7 +85,12 @@
         </prepend>
 
         <!-- this copy the action of the search box --> 
-        <copy css:theme="#topsearchbox" css:content="#portal-searchbox form" attributes="action"/>
+        <copy attributes="action"
+            css:theme="#topsearchbox"
+            css:content="#portal-searchbox form"/>
+        <copy attributes="placeholder"
+            css:theme="#topsearchbox .search-query"
+            css:content="#portal-searchbox #searchGadget"/>
         <!--<append css:theme="#topsearchbox" css:content="#portal-searchbox #LSResult"/>-->
         <!--<xsl:template match="div/@class[contains(., 'LSResult')]">
             <xsl:attribute name="class"><xsl:value-of select="str:replace(., 'modal', '')" /></xsl:attribute>
