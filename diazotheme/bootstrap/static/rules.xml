@@ -6,11 +6,14 @@
     xmlns:xi="http://www.w3.org/2001/XInclude"
     >
 
+    <xsl:output indent="yes"/>
+    <xsl:strip-space elements="*"/>
     <!-- First things first: select the html to use as default -->
     <theme href="base.html" css:if-content="#visual-portal-wrapper"/>
 
     <!-- then add an exception for dialog boxes -->
     <theme href="dialog.html" css:if-content="#content.dialog-wrapper"/>
+    <drop content="p[not(*) and (not(normalize-space()) or text() = '&#160;')]"/>
 
     <!-- this pulls in the title tag -->
     <replace theme="/html/head/title" content="/html/head/title" />
@@ -226,7 +229,7 @@
             </xsl:for-each>
             <div style="display:hidden"></div>
         </replace>
-
+        <!--<xi:include href="addon-contentwellportlets.xml"/>-->
         <xi:include href="addon-facetednavigation.xml"/>
         <append css:theme="#site-scripts" css:content="#portal-footer-wrapper > div > script"/>
     </rules>
@@ -250,7 +253,7 @@
         <xsl:attribute name="class"><xsl:value-of select="." /> btn btn-primary</xsl:attribute>
     </xsl:template>
 
-    <xsl:template match="span/@class[contains(., 'subMenuTitle')]">
+    <xsl:template match='//*[@id="contextHeader"]'>
         <xsl:attribute name="class"><xsl:value-of select="." /> label</xsl:attribute>
     </xsl:template>
 
