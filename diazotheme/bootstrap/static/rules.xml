@@ -25,10 +25,10 @@
         <prepend theme="/html/head" content="/html/head/base"/>
         <after css:theme="meta[http-equiv='X-UA-Compatible']" 
             content="/html/head/link | /html/head/style | /html/head/script | /html/head/meta" />
-        <replace theme="/html/body"
-            content="/html/body"/>
+        <replace theme="/html/body" content="/html/body"/>
     </rules>
 
+    <copy attributes="class dir" css:content="body" css:theme="body"/>
 
     <!-- actually this is never applied 'cause we applied the theme
         only for #visual-portal-wrapper or #content.dialog-wrapper-->
@@ -91,14 +91,92 @@
         </xsl:template> -->
         <append css:theme="#topsearchbox">
                 <div id="LSResult" class="LSResult modal" style="display:none">
-                    <!--<<xsl:attribute name="class"><xsl:value-of select="str:concat(., 'modal', '')" /></xsl:attribute>-->
                     <xsl:copy-of select="//*[@id='LSResult']/*" />
                 </div>
         </append>
 
 
-        <!-- this includes rules for the main content -->
-        <xi:include href="main-content.xml"/>
+        <replace css:theme="#center-column">
+          <div id="center-column"><xsl:attribute name="class">
+                  <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-3:4") and contains(//*[@id="portal-column-content"]/@class,"position-0")'
+                    >twocolumns span9</xsl:if>
+                  <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-3:4") and contains(//*[@id="portal-column-content"]/@class,"position-1:4")'
+                    >twocolumns span9 offset3</xsl:if>
+                  <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-1:2")'
+                    >threecolumns span6 offset3</xsl:if>
+                  <xsl:if test='contains(//*[@id="portal-column-content"]/@class,"width-full")'
+                    >nocolumns span12</xsl:if>
+              </xsl:attribute>
+              <xsl:if css:test=".AbovePortletManager3">
+                  <div id="portletAboveContent">
+                      <xsl:for-each css:select=".AbovePortletManager3 .portletWrapper">
+                          <xi:include href="portlet-rules.xml"/>
+                      </xsl:for-each>
+                  </div>
+              </xsl:if>
+              <div id="viewlet-above-content">
+                  <xsl:for-each css:select="#viewlet-above-content > *">
+                      <xsl:if test="@id">
+                      <xsl:if test="@id!='portlets-above' and
+                                    @id!='portal-breadcrumbs'">
+                          <xsl:copy-of select="current()"/>
+                      </xsl:if>
+                      </xsl:if>
+                      <xsl:if test="not(@id)">
+                          <xsl:copy-of select="current()"/>
+                      </xsl:if>
+                  </xsl:for-each>
+              </div>
+              <article>
+                  <xsl:copy-of css:select="#kssPortalMessage"/>
+                  <xsl:copy-of css:select=".portalMessage"/>
+                  <div id="action-bar">
+                      <ul class="nav nav-tabs">
+                      <xsl:for-each css:select="#content-views > li"><xi:include href="navigation-rules.xml"/></xsl:for-each>
+                      <xsl:for-each css:select="#contentActionMenus > li">
+                          <li class="dropdown pull-right" data-dropdown="dropdown">
+                              <a class="dropdown-toggle" href="#"><xsl:attribute name="href">
+                                      <xsl:value-of select="dl/dt/a/@href"/>
+                                  </xsl:attribute>
+                                  <xsl:copy-of select="dl/dt/a/span"/>
+                                  <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu" style="min-width:150px;">
+                                  <xsl:for-each css:select=".actionMenuContent > ul > li">
+                                      <xsl:copy-of select="current()"/>
+                                  </xsl:for-each>
+                              </ul>
+                          </li>
+                      </xsl:for-each>
+                      </ul>
+                  </div>
+        
+                  <xsl:apply-templates css:select="#content"/>
+              </article>
+              <div class="visualClear"/>
+              <div id="viewlet-below-content">
+                  <xsl:for-each css:select="#viewlet-below-content > *">
+                      <xsl:if test="@id">
+                      <xsl:if test="@id!='portlets-below'">
+                          <xsl:copy-of select="current()"/>
+                      </xsl:if>
+                      </xsl:if>
+                      <xsl:if test="not(@id)">
+                          <xsl:copy-of select="current()"/>
+                      </xsl:if>
+                  </xsl:for-each>
+              </div>
+              <xsl:if css:test=".BelowPortletManager5">
+                  <div id="portletBelowContent">
+                      <xsl:for-each css:select=".BelowPortletManager5 .portletWrapper">
+                          <xi:include href="portlet-rules.xml"/>
+                      </xsl:for-each>
+                  </div>
+              </xsl:if>
+          </div>
+        </replace>
+
+
         <drop css:content="#enable_cookies_message"/>
 
         <!-- what the hell is a "hero-unit"?? -->
@@ -112,8 +190,9 @@
         <replace css:theme="#logo" css:content="#portal-logo"/>
 
         <!-- This iters the global nav menu list items.
-            For each item, it tests if it's an ul tag. If so,
-            it turns it into a bootstrap dropdown.
+            For each item, it tests if it's an ul tag.
+            If it's not an ul it just copy it (an select the active entry).
+            If it's an ul, it turns it into a bootstrap dropdown.
         -->
         <replace css:theme-children="#nav">
             <xsl:for-each css:select="#portal-globalnav > li">
