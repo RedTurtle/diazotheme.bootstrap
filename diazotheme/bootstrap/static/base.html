@@ -48,10 +48,10 @@
   </head>
 
   <body>
-    <div id="header" class="header container page-header">
+    <div id="header" class="header page-header container">
       <header>
         <img id="logo" src="img/logo.png"/>
-        <div class="container navbar-container">
+        <div class="navbar-container">
           <div id="main-navbar" class="navbar">
             <div class="navbar-inner">
               <a class="btn btn-navbar" data-toggle="collapse"
@@ -143,7 +143,7 @@
                    </article>
                    </div>
                 </div>
-                <div id="left-column" class="span3 offset0">
+                <div id="left-column" class="span2 offset0">
                    <div id="left-column-content">
                    <section>
                       <h4 class="portlet-header">Navigation</h4>
@@ -188,7 +188,7 @@
                    </section>
                    </div>
                 </div>
-                <div id="right-column" class="span3">
+                <div id="right-column" class="span2">
                    <div id="right-column-content">
                    <section>
                       <h4 class="portlet-header">Calendar</h4>
@@ -329,15 +329,12 @@
     <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
       -->
     <!-- scripts concatenated and minified via ant build script-->
-    <script>
-       var jQuery14 = jQuery;
-    </script>
     <script src="js/libs/jquery-1.7.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
     <script>
        var jQuery17 = jQuery;
-       $ = jQuery14;
-       jQuery = jQuery14;
+       $ = jQuery17;
+       jQuery = jQuery17;
        jQuery17(document).ready(function () {
           jQuery17('.dropdown-toggle').dropdown();
        });

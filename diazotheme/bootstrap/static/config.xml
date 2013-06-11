@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    >
+
+  <rules if="$layout='fixed'">
+      <before css:theme-children="#container">
+          <xsl:attribute name="class">container</xsl:attribute>
+      </before>
+      <before css:theme-children="div.footer.container">
+        <xsl:attribute name="class">footer container</xsl:attribute>
+      </before>
+      <before css:theme-children="#content-columns .row">
+        <xsl:attribute name="class">row</xsl:attribute>
+      </before>
+      <before css:theme-children="#header">
+          <xsl:attribute name="class">header page-header container</xsl:attribute>
+      </before>
+  </rules>
+  <rules if="$layout='fluid'">
+      <before css:theme-children="#container">
+          <xsl:attribute name="class">container-fluid</xsl:attribute>
+      </before>
+      <before css:theme-children="#content-columns .row">
+        <xsl:attribute name="class">row-fluid</xsl:attribute>
+      </before>
+      <before css:theme-children="div.footer.container">
+        <xsl:attribute name="class">footer container-fluid</xsl:attribute>
+      </before>
+      <before css:theme-children="#header">
+          <xsl:attribute name="class">header page-header container-fluid</xsl:attribute>
+      </before>
+  </rules>
+
+  <before css:theme-children="#main-navbar" if="$navbar-style">
+      <xsl:attribute name="class">navbar <xsl:value-of select="$navbar-style" /></xsl:attribute>
+  </before>
+  
+  <rules if="$form-controls-style">
+    <replace content="div/@class[contains(., 'formControls')]">
+      <xsl:attribute name="class"><xsl:value-of select="." /> form-actions</xsl:attribute>
+    </replace>
+
+    <replace content="input/@class[contains(., 'standalone')] | input/@class[contains(., 'searchButton')] | input/@class[contains(., 'fileType')]">
+        <xsl:attribute name="class"><xsl:value-of select="." /> btn</xsl:attribute>
+    </replace>
+
+    <replace content="input/@class[contains(., 'context')]">
+      <xsl:attribute name="class"><xsl:value-of select="." /> btn btn-primary</xsl:attribute>
+    </replace>
+<!--
+    <replace css:content="input.context[type=submit]">
+        <button type="submit">
+            <xsl:attribute name="class"><xsl:value-of select="." /> btn btn-primary</xsl:attribute>
+            <i class="icon-ok icon-white"></i>
+            <xsl:value-of select="./@value" />
+        </button>
+    </replace>
+    <replace css:content="input.standalone[type=submit][name='form.button.cancel']">
+        <button type="submit">
+            <xsl:attribute name="class"><xsl:value-of select="." /> btn</xsl:attribute>
+            <i class="icon-share-alt"></i>
+            <xsl:value-of select="./@value" />
+        </button>
+    </replace>
+-->
+
+    <replace content='//*[@id="contextHeader"]'>
+        <xsl:attribute name="class"><xsl:value-of select="." /> label</xsl:attribute>
+    </replace>
+  </rules>
+
+  <rules if="$use-html5-form-inputs">
+    <replace content="input/@id[contains(., 'contactEmail')]">
+        <xsl:attribute name="type">email</xsl:attribute>
+    </replace>
+    <replace content="input/@id[contains(., 'eventUrl')]">
+        <xsl:attribute name="type">url</xsl:attribute>
+    </replace>
+    <replace content="input/@id[contains(., 'contactPhone')]">
+        <xsl:attribute name="type">tel</xsl:attribute>
+    </replace>
+    <replace content="input/@name[contains(., 'remoteUrl')]">
+        <xsl:attribute name="type">url</xsl:attribute>
+    </replace>
+  </rules>
+
+</rules>

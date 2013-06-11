@@ -462,6 +462,10 @@ div.row {
     }
 }
 
+.navbar-search .btn{
+    margin-top: 0px;
+}
+
 input.searchPage[type="text"]{
   height: 200%;
 }
@@ -507,8 +511,15 @@ input, textarea, .uneditable-input {
     }
 }
 
-input.searchPage{
-    margin-bottom: 0px;
+#content input.searchField,
+input.searchPage
+{
+    margin-bottom:0px;
+    margin-right: 0.2em;
+}
+
+.form-actions {
+    background-color: transparent;
 }
 
 #search-results-bar .actionMenuContent {
@@ -558,4 +569,8 @@ input.searchPage{
 
 .breadcrumb-container{
     margin-bottom: 0.5em;
+}
+
+.row-fluid [class*="span"] {
+    margin-left: 0;
 }
