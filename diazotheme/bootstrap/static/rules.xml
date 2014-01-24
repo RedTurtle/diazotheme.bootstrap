@@ -8,6 +8,10 @@
 
     <xsl:output indent="yes"/>
     <xsl:strip-space elements="*"/>
+    
+    <notheme if-path="plugins/plonebrowser" />
+    <notheme if-path="plugins/table" />
+    
     <!-- First things first: select the html to use as default -->
     <theme href="base.html" css:if-content="#visual-portal-wrapper"/>
 
